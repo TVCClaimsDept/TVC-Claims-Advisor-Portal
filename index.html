@@ -520,9 +520,13 @@
                                 <option value="spouse">Veteran with Spouse</option>
                                 <option value="spouse_parents">Veteran with Spouse & Parents</option>
                                 <option value="spouse_child">Veteran with Spouse & 1 Child</option>
+                                <option value="spouse_childx2">Veteran with Spouse & 2 Children</option>
+                                <option value="spouse_childx3">Veteran with Spouse & 3 Children</option>
                                 <option value="child_only">Veteran with 1 Child (No Spouse)</option>
                             </select>
+                            <p class="text-[10px] text-slate-400 mt-1">This selection will adjust the estimated monthly pay based on the 2026 VA compensation tables.</p>
                         </div>
+                        <p class="text-[10px] text-slate-400 mt-1">*Note: Under federal law, the VA automatically removes dependent children from your disability benefits when they turn 18. Compensation can only continue up to their 23rd birthday if they are enrolled full-time in an approved school.To maintain these higher benefit payments, veterans must actively submit a Request for Approval of School Attendance (VA Form 21-674). Failure to report school attendance will result in a reduction of benefits and potential overpayment debt. For official determinations, please visit the <a href="https://www.va.gov/disability/compensation-rates/veteran-rates/" target="_blank" class="text-amber-400 hover:underline">VA Current Disability Compensation Rates</a> or consult with an accredited Veterans Service Officer (VSO).</p>
                     </div>
                 </div>
 
@@ -1487,19 +1491,19 @@
             // Est. 2026 Monthly Comp Rates (Simple Approximation for Demo purposes based on official 2026 COLA stats)
             const dependencyType = document.getElementById('dependentStatus').value;
             const rates = {
-                10: { single: 180.42, spouse: 180.42, spouse_parents: 180.42, spouse_child: 180.42, child_only: 180.42 },
-                20: { single: 356.66, spouse: 356.66, spouse_parents: 356.66, spouse_child: 356.66, child_only: 356.66 },
-                30: { single: 552.47, spouse: 617.47, spouse_parents: 669.47, spouse_child: 666.47, child_only: 596.47 },
-                40: { single: 795.84, spouse: 882.84, spouse_parents: 952.84, spouse_child: 947.84, child_only: 853.84 },
-                50: { single: 1132.90, spouse: 1241.90, spouse_parents: 1329.90, spouse_child: 1322.90, child_only: 1205.90 },
-                60: { single: 1435.02, spouse: 1566.02, spouse_parents: 1671.02, spouse_child: 163.02, child_only: 1523.02 },
-                70: { single: 1808.45, spouse: 1961.45, spouse_parents: 2084.45, spouse_child: 2074.45, child_only: 1910.45 },
-                80: { single: 2102.15, spouse: 2277.15, spouse_parents: 2417.15, spouse_child: 2406.15, child_only: 2219.15 },
-                90: { single: 2362.30, spouse: 2559.30, spouse_parents: 2717.30, spouse_child: 2704.30, child_only: 2494.30 },
-                100: { single: 3938.58, spouse: 4158.17, spouse_parents: 4334.41, spouse_child: 4318.99, child_only: 4085.43 }
+                10: { single: 180.42, spouse: 180.42, spouse_parents: 180.42, spouse_child: 180.42, spouse_childx2: 180.42, spouse_childx3: 180.42, child_only: 180.42 },
+                20: { single: 356.66, spouse: 356.66, spouse_parents: 356.66, spouse_child: 356.66, spouse_childx2: 356.66, spouse_childx3: 356.66, child_only: 356.66 },
+                30: { single: 552.47, spouse: 617.47, spouse_parents: 669.47, spouse_child: 666.47, spouse_childx2: 698.47, spouse_childx3: 730.47, child_only: 596.47 },
+                40: { single: 795.84, spouse: 882.84, spouse_parents: 952.84, spouse_child: 947.84, spouse_childx2: 999.84, spouse_childx3: 1033.84, child_only: 853.84 },
+                50: { single: 1132.90, spouse: 1241.90, spouse_parents: 1329.90, spouse_child: 1322.90, spouse_childx2: 1376.90, spouse_childx3: 1430.90, child_only: 1205.90 },
+                60: { single: 1435.02, spouse: 1566.02, spouse_parents: 1671.02, spouse_child: 1663.02, spouse_childx2: 1728.02, spouse_childx3: 1793.02, child_only: 1523.02 },
+                70: { single: 1808.45, spouse: 1961.45, spouse_parents: 2084.45, spouse_child: 2074.45, spouse_childx2: 2150.45, spouse_childx3: 2226.45, child_only: 1910.45 },
+                80: { single: 2102.15, spouse: 2277.15, spouse_parents: 2417.15, spouse_child: 2406.15, spouse_childx2: 2493.15, spouse_childx3: 2580.15, child_only: 2219.15 },
+                90: { single: 2362.30, spouse: 2559.30, spouse_parents: 2717.30, spouse_child: 2704.30, spouse_childx2: 2802.30, spouse_childx3: 2900.30, child_only: 2494.30 },
+                100: { single: 3938.58, spouse: 4158.17, spouse_parents: 4334.41, spouse_child: 4318.99, spouse_childx2: 4428.10, spouse_childx3: 4537.21, child_only: 4085.43 }
             };
 
-            const selectedRateTable = rates[roundedRating] || { single: 0, spouse: 0, spouse_parents: 0, spouse_child: 0, child_only: 0 };
+            const selectedRateTable = rates[roundedRating] || { single: 0, spouse: 0, spouse_parents: 0, spouse_child: 0, spouse_childx2: 0, spouse_childx3: 0, child_only: 0 };
             const finalPay = selectedRateTable[dependencyType] || selectedRateTable['single'] || 0;
 
             document.getElementById('estimatedPayDisplay').innerText = roundedRating === 0 ? "$0.00" : `$${finalPay.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
